@@ -90,7 +90,7 @@ describe a few of the most important parameters:
   very low density of 0.5-1 molecules per nucleus per frame on
   average. For slowSPT, where we only want to track bound molecules,
   but where there can be significant drift and cell movement, I
-  typically use values in the range 0.05-0.1. Units are um^2/s.
+  typically use values in the range 0.05-0.1. Units are um^2 /s.
 * `NumGapsAllowed`: The number of gaps allowed during the
   tracking. E.g. if a molecule is there in frame 1 and 3, but not in
   frame 2, the localizations will not be connected if
