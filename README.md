@@ -103,7 +103,10 @@ objectives with iXon cameras (160 nm per pixel), use these:
 * `impars.NA=1.49` NA of detection objective
 
 More specialized localization and tracking parameters are controlled
-in the `locpars` and `trackpars` structured arrays. 
+in the `locpars` and `trackpars` structured arrays.
+
+Again, please carefully read the MTT algorithm paper for full
+details. 
 
 ## Acknowledgements
 The code implements the MTT algorithm. Please read and cite the
