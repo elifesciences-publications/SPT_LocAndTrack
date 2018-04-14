@@ -12,13 +12,13 @@ and where to save the trajectories and, finally, clicks "run". Below,
 we will describe the code in a little bit of detail and then a brief
 guide to how to use it.
 
-# Multiple-Target Tracing algorithm
+## Multiple-Target Tracing algorithm
 The code uses the Multiple-Target Tracing (MTT) algorithm (see below
 for reference to the key paper). Before using it, please read that
 paper in detail to understand how it works and the function of each
 parameter.
 
-# Example guide - how to run the code on nd2 files
+## Example guide - how to run the code on nd2 files
 *Warning: this code uses BioFormats to read `nd2` files. Some versions
 of BioFormats are incompatible with some Nikon `nd2` versions. When
 this happens, BioFormats will mess-up, re-scale and otherwise corrupt
@@ -36,9 +36,9 @@ get Java errors in Matlab and have to restart. Here we will use
 `SerialProcess_fastSPT_JF646.m` as an example on how to run the code:
 
 1. Collect high-quality single-particle tracking data (SPT) in the
-   fastSPT mode (e.g. spaSPT as described in Hansen, Woringer et al.,
+   fastSPT mode (e.g. spaSPT as described in [Hansen, Woringer et al.,
    Robust model-based analysis of single-particle tracking experiments
-   with Spot-On, **eLife**, 2018).
+   with Spot-On, **eLife**, 2018](https://elifesciences.org/articles/33125)).
 2. Download this repository to your computer. 
 3. If in a BioFormats-compatible nd2 file format, place all `nd2`
 files of the same frame rate in a single folder.
@@ -50,12 +50,60 @@ files of the same frame rate in a single folder.
    lines 19-20.
 5. Adjust `ExposureTime` in line 40 to the time between frames in
    milliseconds. If you use 0.9 us vertical shift speed on an Andor
-   iXon EM-CCD camera, add 447 us beyond the camera exposure time.
+   iXon EM-CCD camera, add 447 us beyond the camera exposure time. All
+   the other parameters are preset for standard fastSPT experiments. 
 6. Click "Run".
 7. The code will save one `MAT`-file per `nd2` file using the
 `trackedPar` format. This format is directly readable by both the
 web-version of [Spot-On](https://spoton.berkeley.edu) and the Matlab
 version,  [Spot-On-Matlab](https://gitlab.com/tjian-darzacq-lab/spot-on-matlab). 
+
+## Considerations for choosing parameters 
+The code comes with a large number of user-specified parameters that
+define how the tracking and localization is performed. Please read the
+MTT-paper in details first (see reference below). Here we will
+describe a few of the most important parameters:
+
+* `LocalizationError`: a probabilitic detection threshold. Typically
+  we use `LocalizationError = -6.25` corresponding to one false
+  positive detection per $`10^{-6.25}`$. How to balance
+  false-positives and false-negatives will depend on the
+  Signal-to-Noise characteristics of your SPT data. Generally, 6-7 is
+  a reasonable range for `LocalizationError`.
+* `EmissionWavelength`: the average wavelength of your emission. Will depend
+  on your fluorophore and also on your emission filter (e.g. if you
+  emission filter cuts off parts of your emissions. Generally, we use
+  580 for JF549 and 664 for JF646.
+* `NumDeflationLoops`: how many deflation loops to do for the
+  detections (i.e. attempting to find molecules partially obscured by
+  other molecules). In my opinion, this feature is not robust and
+  prone to give false positives and if you have a lot of molecules
+  obscured by other molecules, you are imaging at too high densities
+  in my opinion. So always set to 0 for no deflation loops.
+* `MaxExpectedD`: the maximal expected diffusion coefficient for use
+  in the tracking. Thus, this parameter adjusts how large displacements will
+  be considered to be of the same molecule and when a displacement is
+  soo long that it will be taken to be another molecule. For
+  fastSPT/spaSPT I typically use 20, but this requires imaging at a
+  very low density of 0.5-1 molecules per nucleus per frame on
+  average. For slowSPT, where we only want to track bound molecules,
+  but where there can be significant drift and cell movement, I
+  typically use values in the range 0.05-0.1. Units are um^2/s.
+* `NumGapsAllowed`: The number of gaps allowed during the
+  tracking. E.g. if a molecule is there in frame 1 and 3, but not in
+  frame 2, the localizations will not be connected if
+  `NumGapsAllowed=0`, but they will be connected if
+  `NumGapsAllowed>1`. I typically use 1 for fastSPT and 2 for
+  slowSPT. 
+
+You will also need to specify a few parameters specific to your
+microscope. For all our Nikon microscopes with 100x/1.49NA TIRF
+objectives with iXon cameras (160 nm per pixel), use these:
+* `impars.PixelSize=0.16`  um per pixel
+* `impars.NA=1.49` NA of detection objective
+
+More specialized localization and tracking parameters are controlled
+in the `locpars` and `trackpars` structured arrays. 
 
 ## Acknowledgements
 The code implements the MTT algorithm. Please read and cite the
