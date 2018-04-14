@@ -11,6 +11,8 @@ the script, adjusts the parameters, tells it where to find the movies
 and where to save the trajectories and, finally, clicks "run". Below,
 we will describe the code in a little bit of detail and then a brief
 guide to how to use it.
+The respository also contains a GUI (Graphical User Interface). Please
+see below for how to use it. 
 
 ## Multiple-Target Tracing algorithm
 The code uses the Multiple-Target Tracing (MTT) algorithm (see below
@@ -120,7 +122,18 @@ trajectories. Each trajectory contains:
 * `settings`: contains a large amount of relevant metadata. 
 
 Again, please carefully read the MTT algorithm paper for full
-details. 
+details.
+
+## SLIMfast - Graphical User Interface for MTT
+This respository also comes with SLIMfast, a GUI written by Christian
+Richter. This version is somewhat out-of-date and many features are
+broken in newer versions of Matlab. A minimal set of functions work in
+Matlab 2014b and earlier, but if you user newer versions of Matlab,
+expect even the most essential functions not to work. The GUI can be
+found in the folder `SLIMfast_GUI`, where it comes with a manual
+`Manuel SLIMfast.docx` written in French, but with lots of helpful
+images. The GUI is especially helpful for getting to know the code and
+for optimizing parameters. It only reads TIFF stacks. 
 
 ## Acknowledgements
 The code implements the MTT algorithm. Please read and cite the
