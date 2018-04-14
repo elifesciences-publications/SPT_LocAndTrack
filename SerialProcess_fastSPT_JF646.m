@@ -16,10 +16,14 @@ clear; clc; close all; clearvars -global
 
 %%%%%%%%%%%%%%%%%%%% DEFINE INPUT AND OUTPUT PATHS %%%%%%%%%%%%%%%%%%%%%%%%
 % specify input path with nd2 files:
-%input_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/TestData/');
-input_path=('/Users/anderssejrhansen/Dropbox/DataStorage/MicroscopyData/SPT/20180312_blank/');
-output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/FastTrackingData/20180314_BLANK_test/');
-%output_path = input_path;
+input_path=('/Users/anderssejrhansen/Dropbox/DataStorage/MicroscopyData/SPT/');
+output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/FastTrackingData/');
+% add the neccesary paths:
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
+disp('added paths for MTT algorithm mechanics, bioformats...');
+
+
+
 %%%%% make output folder if it does not already exist
 if exist(output_path) == 7
     % OK, output_path exists and is a directory (== 7). 
@@ -78,12 +82,6 @@ trackpars.maxComp=5;
 trackpars.maxOffTime=NumGapsAllowed;
 trackpars.intLawWeight=0.9;
 trackpars.diffLawWeight=0.5;
-
-
-% add the required functions to the path:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
-disp('added paths for MTT algorithm mechanics, bioformats...');
 
 %%%%%%%%%%%%%% READ IN ND2 FILES AND CONVERT TO TIFF FILES %%%%%%%%%%%%%%%%
 %disp('-----------------------------------------------------------------');

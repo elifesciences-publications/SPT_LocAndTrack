@@ -21,26 +21,13 @@ clear; clc; close all; clearvars -global
 %   BioFormats, where you read in a frame at a time using bfGetReader, this
 %   problem is avoided and you can run things in parallel.
 
-%   VERSION 2 - CALCULATE LOCALIZATION ERRORS
-%   Use expression in eqn. 20 in Tingwei Quan (Journal of Biomedical Optics 2010) expression for 
-%   Andor iXon DU 897 EM-CCD detector. This is option 'Quan'. Also
-%   implemented the Thompson, Larson, Webb methods (Biophysical journal 2002), which
-%   is generally not considered accurate. Call this option 'Thompson'.
-%   Performed calibration experiments on the MFM scope on Jan 18, 2017 by
-%   measuring beads over time and assuming Poisson noise in the EM-CCD
-%   camera. Fit the following function:
-%   PixelVal = Gain * (PixelMean - Background)
-%   So Gain is the number of EM-CCD counts per photon.
-%   For JF549 / 561 nm excitation: 
-%           GAIN = 73       BACKGROUND = approx 416
-%   For JF646 / 633 nm excitation: 
-%           GAIN = 66       BACKGROUND = approx 300
-
 %%%%%%%%%%%%%%%%%%%% DEFINE INPUT AND OUTPUT PATHS %%%%%%%%%%%%%%%%%%%%%%%%
 % specify input path with nd2 files:
-%input_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/TestData/');
-input_path=('/Users/anderssejrhansen/Google Drive/DataStorage/MicroscopyData/SPT/20171216_U2OS_Halo-CycT1_fastSPT_slowSPT/slow/');
-output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/SlowTrackingData/20171216_U2OS_Halo-CycT1_fastSPT_slowSPT/');
+input_path=('/Users/anderssejrhansen/Google Drive/DataStorage/MicroscopyData/SPT/');
+output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/SlowTrackingData/');
+% add the neccesary paths:
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
+disp('added paths for MTT algorithm mechanics, bioformats...');
 
 
 %output_path = input_path;
@@ -105,11 +92,6 @@ trackpars.maxOffTime=NumGapsAllowed;
 trackpars.intLawWeight=0.9;
 trackpars.diffLawWeight=0.5;
 
-
-% add the required functions to the path:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
-disp('added paths for MTT algorithm mechanics, bioformats...');
 
 %%%%%%%%%%%%%% READ IN ND2 FILES AND CONVERT TO TIFF FILES %%%%%%%%%%%%%%%%
 %disp('-----------------------------------------------------------------');

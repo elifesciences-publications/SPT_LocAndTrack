@@ -15,10 +15,12 @@ clear; clc; close all; clearvars -global
 
 %%%%%%%%%%%%%%%%%%%% DEFINE INPUT AND OUTPUT PATHS %%%%%%%%%%%%%%%%%%%%%%%%
 % specify input path with nd2 files:
-%input_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/TestData/');
-input_path=('/Users/anderssejrhansen/Google Drive/DataStorage/MicroscopyData/SPT/20170801_U2OS_C32_NLS_2Color/Test1movie/');
-%output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/FastTrackingData/20170801_U2OS_C32_NLS_2Color/');
-output_path = input_path;
+input_path=('/Users/anderssejrhansen/Google Drive/DataStorage/MicroscopyData/SPT//');
+output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/FastTrackingData/');
+% add the neccesary paths:
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
+disp('added paths for MTT algorithm mechanics, bioformats...');
+
 LocalizationError = -6.25; % Localization Error: -6 = 10^-6
 Color1EmissionWavelength = 580; % wavelength in nm; consider emission max and filter cutoff
 Color2EmissionWavelength = 664; % wavelength in nm; consider emission max and filter cutoff
@@ -66,12 +68,6 @@ trackpars.maxOffTime=NumGapsAllowed;
 trackpars.intLawWeight=0.9;
 trackpars.diffLawWeight=0.5;
 
-
-% add the required functions to the path:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/saveastiff_4.0');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
-disp('added paths for MTT algorithm mechanics, bioformats...');
 
 %%%%%%%%%%%%%% READ IN 2-Color TIFF FILES %%%%%%%%%%%%%%%%
 %disp('-----------------------------------------------------------------');

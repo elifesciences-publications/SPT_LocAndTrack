@@ -3,10 +3,10 @@ function [ imgs_3d_matrix ] = MemoryEfficientND2reader( nd2_file_to_open )
 %   MATLAB is annoying when it comes to parallel computing: cannot use the
 %   BioFormat Memoizer wrapper in a parfor loop even though it works
 %   perfectly well in a normal for loop. 
+%   written by Anders Sejr Hansen
 
 % add the neccesary paths:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
 
 %%% read ND2-file:
 

@@ -1,28 +1,20 @@
 %   SerialProcess_fasSPT_JF549_TIFF.m
-%   Anders Sejr Hansen, August 2016
+%   Anders Sejr Hansen, April 2018
 clear; clc; close all; clearvars -global
 
 %   DESCRIPTION
-%   This script takes as input a folder with nd2 files and then outputs
-%   workspaces with tracked single molecules. Briefly, it uses the
-%   BioFormats package to read in nd2 files. Please double-check that this
-%   does not change the pixel intensity values. Nikon keeps updating the
-%   nd2 file format, so if you are using mis-matched Nikon Elements
-%   software versions and bioformat versions, this is a major issue that
-%   you should be aware of. Next, the script feeds the images as a 3D
-%   matrix into the localization part of the MTT algorithm (Part 1) and
-%   subsequently, the tracked particles are fed into the tracking part of
-%   the MTT algorithm (Part 2). 
+%   This script takes as input a folder with TIFF files and then outputs
+%   workspaces with tracked single molecules.
 
 %%%%%%%%%%%%%%%%%%%% DEFINE INPUT AND OUTPUT PATHS %%%%%%%%%%%%%%%%%%%%%%%%
 % specify input path with nd2 files:
-%input_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/TestData/');
-input_path=('/Users/anderssejrhansen/Dropbox/DataStorage/MicroscopyData/SPT/20180410_CameraTest/umanager/test1/');
-%output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/FastTrackingData/20180314_BLANK_test/');
+input_path=('/Users/anderssejrhansen/Dropbox/DataStorage/MicroscopyData/SPT/');
+output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/Analysis/FastTrackingData/');
+% add the neccesary paths:
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
+disp('added paths for MTT algorithm mechanics, bioformats...');
 
 
-
-output_path = input_path;
 %%%%% make output folder if it does not already exist
 if exist(output_path) == 7
     % OK, output_path exists and is a directory (== 7). 
@@ -82,11 +74,6 @@ trackpars.maxOffTime=NumGapsAllowed;
 trackpars.intLawWeight=0.9;
 trackpars.diffLawWeight=0.5;
 
-
-% add the required functions to the path:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
-disp('added paths for MTT algorithm mechanics, bioformats...');
 
 %%%%%%%%%%%%%% READ IN ND2 FILES AND CONVERT TO TIFF FILES %%%%%%%%%%%%%%%%
 %disp('-----------------------------------------------------------------');

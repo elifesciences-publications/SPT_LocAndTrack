@@ -15,10 +15,13 @@ clear; clc; close all; clearvars -global
 
 %%%%%%%%%%%%%%%%%%%% DEFINE INPUT AND OUTPUT PATHS %%%%%%%%%%%%%%%%%%%%%%%%
 % specify input path with nd2 files:
-%input_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/TestData/');
-input_path=('/Users/AndersSejrHansen/Dropbox/DataStorage/MicroscopyData/fixedPALM/20161121_mESC_2Color_STORM/');
-%output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/PALM/TwoColorPALM/PALM_reconstruction_data/20161112_C59_Halo-mCTCF_JF549_JF646/');
-output_path = input_path;
+input_path=('/Users/AndersSejrHansen/Dropbox/DataStorage/MicroscopyData/fixedPALM/');
+output_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/PALM/TwoColorPALM/PALM_reconstruction_data/');
+% add the neccesary paths:
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
+disp('added paths for MTT algorithm mechanics, bioformats...');
+
+
 LocalizationError = -6; % Localization Error: -6 = 10^-6
 Color1EmissionWavelength = 580; % wavelength in nm; consider emission max and filter cutoff
 Color2EmissionWavelength = 664; % wavelength in nm; consider emission max and filter cutoff
@@ -66,12 +69,6 @@ trackpars.maxOffTime=NumGapsAllowed;
 trackpars.intLawWeight=0.9;
 trackpars.diffLawWeight=0.5;
 
-
-% add the required functions to the path:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/saveastiff_4.0');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
-disp('added paths for MTT algorithm mechanics, bioformats...');
 
 %%%%%%%%%%%%%% READ IN 2-Color TIFF FILES %%%%%%%%%%%%%%%%
 %disp('-----------------------------------------------------------------');

@@ -16,10 +16,13 @@ clear; clc; close all; clearvars -global
 
 %%%%%%%%%%%%%%%%%%%% DEFINE INPUT AND OUTPUT PATHS %%%%%%%%%%%%%%%%%%%%%%%%
 % specify input path with nd2 files:
-%input_path=('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/TestData/');
-input_path=('/Users/anderssejrhansen/Dropbox/DataStorage/MicroscopyData/fixedPALM/20161009_C45_mRad21-Halo-V5_500nM_PA-JF646_PALM/');
-%output_path=('/Users/AndersSejrHansen/Dropbox/DataStorage/MicroscopyData/fixedPALM/20160822_mESC_C87_C59/20160822_mESC_C87_Halo-mCTCF_500nM_PA-JF549/');
-output_path = input_path;
+input_path=('/Users/anderssejrhansen/Dropbox/DataStorage/MicroscopyData/fixedPALM/');
+output_path=('/Users/AndersSejrHansen/Dropbox/DataStorage/MicroscopyData/fixedPALM/');
+
+% add the neccesary paths:
+addpath(genpath(['.' filesep 'Batch_MTT_code' filesep])); % MTT & BioFormats
+disp('added paths for MTT algorithm mechanics, bioformats...');
+
 LocalizationError = -6; % Localization Error: -6 = 10^-6
 EmissionWavelength = 664; % wavelength in nm; consider emission max and filter cutoff
 ExposureTime = 25; % in milliseconds
@@ -68,11 +71,6 @@ trackpars.maxOffTime=NumGapsAllowed;
 trackpars.intLawWeight=0.9;
 trackpars.diffLawWeight=0.5;
 
-
-% add the required functions to the path:
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist');
-addpath('/Users/anderssejrhansen/Dropbox/MatLab/Lab/Microscopy/SingleParticleTracking/SoftwarePackages/SLIMFAST_batch_fordist/bfmatlab');
-disp('added paths for MTT algorithm mechanics, bioformats...');
 
 %%%%%%%%%%%%%% READ IN ND2 FILES AND CONVERT TO TIFF FILES %%%%%%%%%%%%%%%%
 %disp('-----------------------------------------------------------------');
