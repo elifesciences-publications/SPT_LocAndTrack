@@ -12,6 +12,21 @@ and where to save the trajectories and, finally, clicks "run". Below,
 we will describe the code in a little bit of detail and then a brief
 guide to how to use it.
 
+# Multiple-Target Tracing algorithm
+The code uses the Multiple-Target Tracing (MTT) algorithm (see below
+for reference to the key paper). Before using it, please read that
+paper in detail to understand how it works and the function of each
+parameter.
+
+# Example guide - how to run the code on nd2 files
+**Warning: this code uses BioFormats to read `nd2` files. Some versions
+of BioFormats are incompatible with some Nikon `nd2` versions. When
+this happens, BioFormats will mess-up, re-scale and otherwise corrupt
+the `nd2` file, with catastrophic results. Please verify that your
+`nd2` file version is compatible with this version of BioFormats after
+loading in a file. There is also a version of the code in this
+repository that reads TIFF files instead, `SerialProcess_fastSPT_JF549_TIFF.m`.**
+
 ## Acknowledgements
 The code implements the MTT algorithm. Please read and cite the
 published paper:
