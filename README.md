@@ -105,6 +105,20 @@ objectives with iXon cameras (160 nm per pixel), use these:
 More specialized localization and tracking parameters are controlled
 in the `locpars` and `trackpars` structured arrays.
 
+## Output MAT-files: SPT Trajectory data
+After running the localization and dectection code, you will get a
+MAT-file for each movie. Once loaded back into Matlab you will see
+that these contain two structured arrays:
+* `trackedPar`: structure array with length equal to the number of
+trajectories. Each trajectory contains:
+	* `trackedPar.xy`: Nx2 matrix of xy coordinates (double) in micrometers,
+    where N is the trajectory length.
+	* `trackedPar.Frame`: Nx1 column vector of the frame IDs (integers)
+    of where the particle was located.
+	* `trackedPar.TimeStamp`: Nx1 column vector of the time stamp (double)
+    of when the particle was located in that frame.
+* `settings`: contains a large amount of relevant metadata. 
+
 Again, please carefully read the MTT algorithm paper for full
 details. 
 
