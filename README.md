@@ -149,4 +149,22 @@ Richter. The code here comes from the GUI distributed by Davide
 Normanno, Mohamed El-Beheiry and Zhe Liu. The GUI was "de-GUIfied" and
 interfaced for batch processing by Mustafa Mir. The script-interface,
 custom-BioFormat reader and parallel processing framework was written
-by Anders Sejr Hansen.
+by Anders Sejr Hansen. This code also made use of BioFormats for
+Matlab. 
+
+## License
+The script-interface, custom-BioFormat reader and parallel processing
+framework (i.e. the wrapper) are all are released under the GNU General Public License version 3 or upper (GPLv3+).
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
