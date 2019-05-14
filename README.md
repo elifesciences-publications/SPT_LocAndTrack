@@ -2,6 +2,9 @@ Anisotropy
 --------------------------
 this repository is maintained by Anders Sejr Hansen
 
+### This code is associated with the paper from McSwiggen et al., "Evidence for DNA-mediated nuclear compartmentalization distinct from phase separation". eLife, 2019. http://dx.doi.org/10.7554/eLife.47098
+
+
 # Overview of code for localization and tracking
 This repository contains Matlab code for processing raw SPT movies in
 either Nikon's nd2 format or in TIFF format. It contains multiple
